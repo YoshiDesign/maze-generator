@@ -1,8 +1,7 @@
 <html>
 <head>
 <title>Maze</title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="mazegenerator.js"></script>
+<script src="maze.js"></script>
 <style type="text/css">
 #maze {
     border-collapse: collapse;
@@ -16,24 +15,40 @@
 </head>
 <body>
 
-<table id="maze">
-<tbody></tbody>
+<table>
+<tbody id="maze"></tbody>
 </table>
 
 <script>
-    var disp = newMaze(20,20);
+
+    var disp   = newMaze(20,20);
+    var mzBody = document.getElementById('maze')
+    var td = document.createElement('TD')
+    var tr = document.createElement('TR')
+
     for (var i = 0; i < disp.length; i++) {
-        $('#maze > tbody').append("<tr>");
+
+        mzBody.appendChild(tr.cloneNode())
+
+
         for (var j = 0; j < disp[i].length; j++) {
+
             var selector = i+"-"+j;
-            $('#maze > tbody').append("<td id='"+selector+"'>&nbsp;</td>");
-            if (disp[i][j][0] == 0) { $('#'+selector).css('border-top', '2px solid black'); }
-            if (disp[i][j][1] == 0) { $('#'+selector).css('border-right', '2px solid black'); }
-            if (disp[i][j][2] == 0) { $('#'+selector).css('border-bottom', '2px solid black'); }
-            if (disp[i][j][3] == 0) { $('#'+selector).css('border-left', '2px solid black'); }
+            var next_td  = td.cloneNode()
+
+            next_td.setAttribute('id', selector)
+            mzBody.appendChild(next_td);
+
+
+            if (disp[i][j][0] == 0) { document.getElementById(selector).style.borderTop    = '2px solid black'}
+            if (disp[i][j][1] == 0) { document.getElementById(selector).style.borderRight  = '2px solid black'}
+            if (disp[i][j][2] == 0) { document.getElementById(selector).style.borderBottom = '2px solid black'}
+            if (disp[i][j][3] == 0) { document.getElementById(selector).style.borderLeft   = '2px solid black'}
+
         }
-        $('#maze > tbody').append("</tr>");
+
     }
+
 </script>
 
 </body>
